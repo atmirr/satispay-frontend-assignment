@@ -8,16 +8,16 @@ export function toConnection<A extends { id: string }>(
   size: number
 ): Connection<A> {
   const sliced = as.slice(0, size);
-  const edges: Array<Edge<A>> = sliced.map(a => ({ cursor: a.id, node: a }));
+  const edges: Array<Edge<A>> = sliced.map((a) => ({ cursor: a.id, node: a }));
   const endCursor = pipe(
     A.last(edges),
-    O.map(a => a.cursor),
+    O.map((a) => a.cursor),
     O.toUndefined
   );
   const hasNextPage = size < as.length;
   const pageInfo: PageInfo = {
     endCursor,
-    hasNextPage
+    hasNextPage,
   };
   return { edges, pageInfo };
 }
@@ -26,5 +26,5 @@ export function toConnection<A extends { id: string }>(
  * Data-last version of Array.prototype.slice
  */
 export function slice<A>(start?: number, end?: number): (a: A[]) => A[] {
-  return as => as.slice(start, end);
+  return (as) => as.slice(start, end);
 }

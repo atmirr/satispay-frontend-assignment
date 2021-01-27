@@ -1,8 +1,9 @@
-import { IResolvers } from "graphql-tools";
-import * as pokemons from "./models/pokemons";
+import { IResolvers } from 'graphql-tools';
+import * as pokemons from './models/pokemons';
 
 export const resolvers: IResolvers = {
   Query: {
-    pokemons: (_source, args) => pokemons.query(args)
-  }
+    pokemons: (_source, args) => pokemons.query(args),
+    pokemonsTypes: (_source) => pokemons.pokemonsTypes(),
+  },
 };
